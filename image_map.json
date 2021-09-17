@@ -1,0 +1,27 @@
+{
+  "layers": [
+    {
+      name: "nose",
+      count: 5,
+      distribution: {
+        nose0: 20,
+        nose1: 20,
+        nose2: 20,
+        nose3: 20,
+        nose4: 20
+      }
+    },
+    {
+      name: "eyes",
+      count: 5,
+      distribution: {
+        eyes0: 20,
+        eyes1: 20,
+        eyes2: 20,
+        eyes3: 20,
+        eyes4: 20
+      }
+    }
+  ],
+  "imageFileName": "calaverita"
+}
