@@ -1,27 +1,391 @@
 {
+  "image_file_name": "calaverita",
+  "image_count": 100,
   "layers": [
     {
-      name: "nose",
-      count: 5,
-      distribution: {
-        nose0: 20,
-        nose1: 20,
-        nose2: 20,
-        nose3: 20,
-        nose4: 20
-      }
+      "folderName": "Backgrounds",
+      "fileName": "Background",
+      "count": 6,
+      "distribution": [
+        {
+          "feature_name": "Background1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Background2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Background3",
+          "weight": 10
+        },
+        {
+          "feature_name": "Background4",
+          "weight": 10
+        },
+        {
+          "feature_name": "Background5",
+          "weight": 10
+        },
+        {
+          "feature_name": "Background6",
+          "weight": 10
+        }
+      ]
     },
     {
-      name: "eyes",
-      count: 5,
-      distribution: {
-        eyes0: 20,
-        eyes1: 20,
-        eyes2: 20,
-        eyes3: 20,
-        eyes4: 20
-      }
+      "folderName": "SkullWTeeth",
+      "fileName": "SkullWTeeth",
+      "count": 1,
+      "distribution": [
+        {
+          "feature_name": "SkullWTeeth1",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "Noses",
+      "fileName": "Nose",
+      "count": 11,
+      "distribution": [
+        {
+          "feature_name": "Nose1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose3",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose4",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose5",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose6",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose7",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose8",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose9",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose10",
+          "weight": 10
+        },
+        {
+          "feature_name": "Nose11",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "Eyes",
+      "fileName": "Eyes",
+      "count": 11,
+      "distribution": [
+        {
+          "feature_name": "Eyes1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes3",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes4",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes5",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes6",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes7",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes8",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes9",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes10",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyes11",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "UnderEyes",
+      "fileName": "UnderEyes",
+      "count": 3,
+      "distribution": [
+        {
+          "feature_name": "UnderEyes1",
+          "weight": 10
+        },
+        {
+          "feature_name": "UnderEyes2",
+          "weight": 10
+        },
+        {
+          "feature_name": "UnderEyes3",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "Eyebrows",
+      "fileName": "Eyebrows",
+      "count": 4,
+      "distribution": [
+        {
+          "feature_name": "Eyebrows1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyebrows2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyebrows3",
+          "weight": 10
+        },
+        {
+          "feature_name": "Eyebrows4",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "BetweenBrows",
+      "fileName": "BetweenBrows",
+      "count": 16,
+      "distribution": [
+        {
+          "feature_name": "BetweenBrows1",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows2",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows3",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows4",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows5",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows6",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows7",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows8",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows9",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows10",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows11",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows12",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows13",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows14",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows15",
+          "weight": 10
+        },
+        {
+          "feature_name": "BetweenBrows16",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "Chin",
+      "fileName": "Chin",
+      "count": 3,
+      "distribution": [
+        {
+          "feature_name": "Chin1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Chin2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Chin3",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "UpperLip",
+      "fileName": "UpperLip",
+      "count": 10,
+      "distribution": [
+        {
+          "feature_name": "UpperLip1",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip2",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip3",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip4",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip5",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip6",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip7",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip8",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip9",
+          "weight": 10
+        },
+        {
+          "feature_name": "UpperLip10",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "TopOfHead",
+      "fileName": "Top",
+      "count": 11,
+      "distribution": [
+        {
+          "feature_name": "Top1",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top2",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top3",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top4",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top5",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top6",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top7",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top8",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top9",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top10",
+          "weight": 10
+        },
+        {
+          "feature_name": "Top11",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "folderName": "OutlineSkull",
+      "fileName": "OutlineSkull",
+      "count": 1,
+      "distribution": [
+        {
+          "feature_name": "OutlineSkull1",
+          "weight": 10
+        }
+      ]
     }
-  ],
-  "imageFileName": "calaverita"
+  ]
 }
