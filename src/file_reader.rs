@@ -1,25 +1,27 @@
 use serde_json;
 use std::fs;
 
-pub use serde::{Deserialize, Serialize};
-pub use serde_json::Result;
+use serde::{Deserialize, Serialize};
+use serde_json::Result;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ImageDistributionJsonFile {
   pub image_file_name: String,
+  pub description: String,
+  pub image_count: u32,
   pub layers: Vec<Layer>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Layer {
-  pub name: String,
-  pub count: i32,
+  pub folder_name: String,
+  pub trait_type: String,
   pub distribution: Vec<Distribution>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Distribution {
-  pub feature_name: String,
+  pub value: String,
   pub weight: u32,
 }
 
