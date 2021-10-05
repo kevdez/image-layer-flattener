@@ -21,7 +21,7 @@ fn main() {
   println!("{:?} are the args", args);
   if args.len() > 1 {
     println!("the root level directory is: {:?}", args[1]);
-    make_nft_metadata(args[1].clone(), &img_json_file, &images);
+    make_nft_metadata( &img_json_file, &images);
     // make_nfts(args[1].clone(), &img_json_file, &images);
   } else {
     println!("Please specificy root level directory of the images.");

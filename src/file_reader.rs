@@ -2,7 +2,7 @@ use serde_json;
 use std::fs;
 
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
+// use serde_json::Result;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ImageDistributionJsonFile {

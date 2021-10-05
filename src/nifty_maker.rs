@@ -6,6 +6,7 @@ use image::ImageBuffer;
 use crate::file_reader::ImageDistributionJsonFile;
 use crate::weighted_image_chooser::ImageMapping;
 
+#[allow(dead_code)]
 pub fn make_nfts(
   root_image_directory: String,
   img_json_file: &ImageDistributionJsonFile,
