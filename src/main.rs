@@ -2,6 +2,7 @@ use clap::{App, Arg};
 use std::env;
 use std::fs;
 use std::process::exit;
+use std::time::{Duration, Instant};
 
 mod file_reader;
 mod nft_metadata_writer;
@@ -9,6 +10,8 @@ mod nifty_maker;
 mod weighted_image_chooser;
 
 fn main() {
+    let start = Instant::now();
+
     let args: Vec<String> = env::args().map(|x| x.to_string()).collect();
     println!("{:?} are the args", args);
     const INPUT: &str = "JSON_INPUT_FILE";
@@ -70,4 +73,6 @@ fn main() {
             println!("commands not recognized");
         }
     }
+    let duration = start.elapsed();
+    println!("Time elapsed from start to finish is: \n\n\t{:?}", duration);
 }
