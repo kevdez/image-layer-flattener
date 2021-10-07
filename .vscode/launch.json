@@ -40,6 +40,20 @@
       },
       "args": [],
       "cwd": "${workspaceFolder}"
-    }
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Test highlighted function",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run"
+        ]
+      },
+      "program": "${cargo:program}",
+      "args": ["${selectedText}"],
+      "cwd": "${workspaceFolder}"
+    },
   ]
 }
