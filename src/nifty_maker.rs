@@ -46,7 +46,7 @@ pub fn make_nfts(
     for folder in layers.iter() {
         for distribution in folder.distribution.iter() {
             let path = format!(
-                "./{}/{}/{}",
+                "./{}/{}/{}.png",
                 root_image_directory, folder.folder_name, distribution.value
             );
             print!(
