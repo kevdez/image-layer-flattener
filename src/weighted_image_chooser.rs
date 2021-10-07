@@ -2,12 +2,15 @@ use std::collections::HashMap;
 
 use rand::prelude::*;
 use rand::{distributions::WeightedIndex, thread_rng};
+#[allow(unused_imports)]
+use rayon::iter::IntoParallelIterator;
 // mod file_reader;
 use crate::file_reader::ImageDistributionJsonFile;
 
 #[derive(Debug)]
 pub struct ImageMapping {
     pub file_name: String,
+    pub image_number: u32,
     pub name: String,
     pub features_list: Vec<String>,
 }
@@ -19,6 +22,7 @@ pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile) -> Vec<Ima
 
     let mut file_names = vec![];
     let mut metadata_names = vec![];
+    let mut image_numbers = vec![];
     for i in 1..=*image_count {
         file_names.push(format!(
             "{prefix}{image_num}{file_extension}",
@@ -26,6 +30,7 @@ pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile) -> Vec<Ima
             image_num = i,
             file_extension = ".png"
         ));
+        image_numbers.push(i);
         metadata_names.push(format!("{} #{}", img_json_file.image_file_name, i));
     }
     // let mut files_with_added_feature: Vec<String> = vec![];
@@ -65,6 +70,7 @@ pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile) -> Vec<Ima
     for (i, (_key, val)) in images.iter().enumerate() {
         result.push(ImageMapping {
             file_name: file_names[i].clone(),
+            image_number: image_numbers[i],
             name: metadata_names[i].clone(),
             features_list: val.clone(),
         });

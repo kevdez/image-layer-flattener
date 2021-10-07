@@ -10,3 +10,10 @@ Cargo.lock
 **/*.rs.bk
 
 .DS_Store
+
+results/
+Calaveritas/
+image_map*
+nft-metadata.json
+image_map.json
+nft-metadata.json

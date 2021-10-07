@@ -3,8 +3,8 @@ use std::io::Write;
 
 use crate::file_reader::ImageDistributionJsonFile;
 use crate::weighted_image_chooser::ImageMapping;
+use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
-// use serde_json::Result;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct NftMetadataAttribute {
@@ -26,10 +26,11 @@ pub fn make_nft_metadata(
 ) {
     let layers = &img_json_file.layers;
 
-    for (img_index, image) in images_map.iter().enumerate() {
+    images_map.par_iter().for_each(|image| {
         println!("Generating image: {:?}", image);
-        let file_name = image.file_name.clone();
+        let file_name = &image.file_name.clone();
         let nft_name = image.name.clone();
+        let image_number = image.image_number;
         let mut metadata = NftMetadata {
             name: nft_name.clone(),
             description: img_json_file.description.clone(),
@@ -43,39 +44,11 @@ pub fn make_nft_metadata(
             };
             metadata.attributes.push(attr);
         }
-
-        let save_path = format!("results/nft-metadata/nft-metadata{}.json", img_index+1);
-        let json =  serde_json::to_string_pretty(&metadata).unwrap();
+        let save_path = format!("results/nft-metadata/nft-metadata{}.json", image_number);
+        let json = serde_json::to_string_pretty(&metadata).unwrap();
         // println!("Saving {:?} ...", save_path);
         let mut file = File::create(save_path).unwrap();
         file.write_all(json.as_bytes()).unwrap();
-    }
-}
-#[cfg(test)]
-mod tests {
-    // use super::*;
-
-    #[test]
-    fn some_test() {
-        assert_eq!(1 + 1, 2);
-    }
-
-    // #[test]
-    // fn converts_nft_metadata_to_json_correctly() {
-    //     let data: NftMetadata = NftMetadata {
-    //         name: "calaverita numero 777".to_owned(),
-    //         description: "calaveritas NFTs".to_owned(),
-    //         image: "".to_owned(),
-    //         attributes: vec![NftMetadataAttribute {
-    //             trait_type: "Background".to_owned(),
-    //             value: "rojo".to_owned(),
-    //         }],
-    //     };
-    //     assert_eq!(create_metadata_json(data), "{\n  \"name\": \"calaverita numero 777\",\n  \"description\": \"calaveritas NFTs\",\n  \"image\": \"\",\n  \"attributes\": [\n    {\n      \"trait_type\": \"Background\",\n      \"value\": \"rojo\"\n    }\n  ]\n}");
-    // }
-
-    #[test]
-    fn another() {
-        panic!("Make this test fail");
-    }
+    });
+    println!("done?");
 }
