@@ -1,11 +1,12 @@
 extern crate image;
 use std::collections::HashMap;
 
-use image::DynamicImage;
 use rayon::prelude::*;
 
 use image::imageops;
+use image::DynamicImage;
 use image::ImageBuffer;
+use imageops::FilterType;
 
 use crate::file_reader::ImageDistributionJsonFile;
 use crate::weighted_image_chooser::ImageMapping;
@@ -49,7 +50,7 @@ pub fn make_nfts(
                 "./{}/{}/{}.png",
                 root_image_directory, folder.folder_name, distribution.value
             );
-            print!(
+            println!(
                 "Opening feature image and storing it into hashmap: {} ...",
                 path
             );
@@ -61,7 +62,7 @@ pub fn make_nfts(
 
     // create the images
     images_map.par_iter().for_each(|image| {
-        let mut imgbuf: image::RgbaImage = ImageBuffer::new(1500, 1500);
+        let mut imgbuf: image::RgbaImage = ImageBuffer::new(850, 850);
         let file_name = image.file_name.clone();
         for (i, layer) in layers.iter().enumerate() {
             let feature_img_name = format!("{}.png", image.features_list[i]);
@@ -70,8 +71,19 @@ pub fn make_nfts(
                 root_image_directory, layer.folder_name, feature_img_name
             );
             println!("applying {} to image {}", path, file_name);
-            let loaded_image: &DynamicImage = buffer_hashmap.get(&path).unwrap();
-            imageops::overlay(&mut imgbuf, loaded_image, 0, 0);
+            let resized_image;
+            #[allow(unused_variables)]
+            let loaded_image: &DynamicImage = match buffer_hashmap.get(&path) {
+                Some(dynamic_image) => {
+                    resized_image = dynamic_image.resize(850, 850, FilterType::Lanczos3);
+                    &resized_image
+                }
+                None => {
+                    println!("path not found...");
+                    return ();
+                }
+            };
+            imageops::overlay(&mut imgbuf, &resized_image, 0, 0);
         }
 
         let save_path = format!("results/images/{}", file_name);

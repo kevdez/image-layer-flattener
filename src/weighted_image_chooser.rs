@@ -15,7 +15,7 @@ pub struct ImageMapping {
     pub features_list: Vec<String>,
 }
 
-pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile) -> Vec<ImageMapping> {
+pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile, file_extension: String) -> Vec<ImageMapping> {
     let file_name = &img_json_file.image_file_name;
     let image_count = &img_json_file.image_count;
     let layers = &img_json_file.layers;
@@ -25,10 +25,10 @@ pub fn generate_images_map(img_json_file: &ImageDistributionJsonFile) -> Vec<Ima
     let mut image_numbers = vec![];
     for i in 1..=*image_count {
         file_names.push(format!(
-            "{prefix}{image_num}{file_extension}",
+            "{prefix}{image_num}{file_ext}",
             prefix = file_name,
             image_num = i,
-            file_extension = ".png"
+            file_ext = file_extension
         ));
         image_numbers.push(i);
         metadata_names.push(format!("{} #{}", img_json_file.image_file_name, i));

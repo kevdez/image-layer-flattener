@@ -2,7 +2,7 @@ use clap::{App, Arg};
 use std::env;
 use std::fs;
 use std::process::exit;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 mod file_reader;
 mod nft_metadata_writer;
@@ -14,8 +14,9 @@ fn main() {
 
     let args: Vec<String> = env::args().map(|x| x.to_string()).collect();
     println!("{:?} are the args", args);
-    const INPUT: &str = "JSON_INPUT_FILE";
-    const FOLDER: &str = "FOLDER";
+    const INPUT: &str = "json input file";
+    const FOLDER: &str = "folder";
+    const IMG_EXT: &str = "image extension";
     let matches = App::new("Nifty Magic Image Maker")
         .version("1.0")
         .author("Kevin H. <contact@whatsnextforkev.in>")
@@ -34,6 +35,15 @@ fn main() {
                         .help("Sets the folder to read images from")
                         .required(true)
                         .index(2),
+                )
+                .arg(
+                    Arg::with_name(IMG_EXT)
+                        .short("ext")
+                        .long("extension")
+                        .value_name(IMG_EXT)
+                        .help("Sets the file extension of the images")
+                        .required(false)
+                        .takes_value(true),
                 ),
         )
         .get_matches();
@@ -60,11 +70,12 @@ fn main() {
                 // Now we have a reference to run's matches
                 let json_file_arg: &str = run_matches.value_of(INPUT).unwrap();
                 let folder_arg: &str = run_matches.value_of(FOLDER).unwrap();
+                let img_extension: &str = run_matches.value_of(IMG_EXT).unwrap_or_else(|| ".png");
                 fs::create_dir("results").unwrap_or(());
                 fs::create_dir("results/nft-metadata").unwrap_or(());
                 fs::create_dir("results/images").unwrap_or(());
                 let img_json_file = file_reader::read_input_json_file(json_file_arg);
-                let images = weighted_image_chooser::generate_images_map(&img_json_file);
+                let images = weighted_image_chooser::generate_images_map(&img_json_file, img_extension.to_string());
                 nft_metadata_writer::make_nft_metadata(&img_json_file, &images);
                 nifty_maker::make_nfts(folder_arg.to_string(), &img_json_file, &images);
             }
