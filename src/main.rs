@@ -17,6 +17,7 @@ fn main() {
     const INPUT: &str = "json input file";
     const FOLDER: &str = "folder";
     const IMG_EXT: &str = "image extension";
+    const IMG_SIZE: &str = "image size";
     let matches = App::new("Nifty Magic Image Maker")
         .version("1.0")
         .author("Kevin H. <contact@whatsnextforkev.in>")
@@ -38,10 +39,19 @@ fn main() {
                 )
                 .arg(
                     Arg::with_name(IMG_EXT)
-                        .short("ext")
+                        .short("e")
                         .long("extension")
                         .value_name(IMG_EXT)
                         .help("Sets the file extension of the images")
+                        .required(false)
+                        .takes_value(true),
+                )
+                .arg(
+                    Arg::with_name(IMG_SIZE)
+                        .short("i")
+                        .long("imagesize")
+                        .value_name(IMG_SIZE)
+                        .help("Sets the output image size, default: 800x800")
                         .required(false)
                         .takes_value(true),
                 ),
@@ -67,17 +77,40 @@ fn main() {
         }
         "run" => {
             if let Some(run_matches) = matches.subcommand_matches("run") {
-                // Now we have a reference to run's matches
+                // Now we have a reference to run's matches, to gather all arguments.
                 let json_file_arg: &str = run_matches.value_of(INPUT).unwrap();
                 let folder_arg: &str = run_matches.value_of(FOLDER).unwrap();
                 let img_extension: &str = run_matches.value_of(IMG_EXT).unwrap_or_else(|| ".png");
+                let img_size: &str = run_matches.value_of(IMG_SIZE).unwrap_or_else(|| "800x800");
+                let width_height: Vec<&str> = img_size.split("x").collect();
+                let img_width: u32 = width_height[0].parse().unwrap();
+                let img_height: u32 = width_height[1].parse().unwrap();
+
+                // Create the results directory.
                 fs::create_dir("results").unwrap_or(());
                 fs::create_dir("results/nft-metadata").unwrap_or(());
                 fs::create_dir("results/images").unwrap_or(());
+
+                // read the JSON file
                 let img_json_file = file_reader::read_input_json_file(json_file_arg);
-                let images = weighted_image_chooser::generate_images_map(&img_json_file, img_extension.to_string());
+                
+                // generate the weights of the images
+                let images = weighted_image_chooser::generate_images_map(
+                    &img_json_file,
+                    img_extension.to_string(),
+                );
+
+                // generate the metadata json files
                 nft_metadata_writer::make_nft_metadata(&img_json_file, &images);
-                nifty_maker::make_nfts(folder_arg.to_string(), &img_json_file, &images);
+                
+                // generate the images
+                nifty_maker::make_nfts(
+                    folder_arg.to_string(),
+                    &img_json_file,
+                    &images,
+                    img_width,
+                    img_height,
+                );
             }
         }
         _ => {

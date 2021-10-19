@@ -15,6 +15,8 @@ pub fn make_nfts(
     root_image_directory: String,
     img_json_file: &ImageDistributionJsonFile,
     images_map: &Vec<ImageMapping>,
+    img_width: u32,
+    img_height: u32
 ) {
     let layers = &img_json_file.layers;
     let mut buffer_hashmap: HashMap<String, DynamicImage> = HashMap::new();
@@ -62,7 +64,7 @@ pub fn make_nfts(
 
     // create the images
     images_map.par_iter().for_each(|image| {
-        let mut imgbuf: image::RgbaImage = ImageBuffer::new(850, 850);
+        let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
         let file_name = image.file_name.clone();
         for (i, layer) in layers.iter().enumerate() {
             let feature_img_name = format!("{}.png", image.features_list[i]);
@@ -75,7 +77,7 @@ pub fn make_nfts(
             #[allow(unused_variables)]
             let loaded_image: &DynamicImage = match buffer_hashmap.get(&path) {
                 Some(dynamic_image) => {
-                    resized_image = dynamic_image.resize(850, 850, FilterType::Lanczos3);
+                    resized_image = dynamic_image.resize(img_width, img_height, FilterType::Lanczos3);
                     &resized_image
                 }
                 None => {
