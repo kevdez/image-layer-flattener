@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
 use clap::{App, Arg};
 use std::env;
 use std::fs;
@@ -44,7 +46,7 @@ fn main() {
                         .value_name(IMG_EXT)
                         .help("Sets the file extension of the images")
                         .required(false)
-                        .takes_value(true),
+                        .takes_value(true)
                 )
                 .arg(
                     Arg::with_name(IMG_SIZE)
@@ -82,6 +84,7 @@ fn main() {
                 let folder_arg: &str = run_matches.value_of(FOLDER).unwrap();
                 let img_extension: &str = run_matches.value_of(IMG_EXT).unwrap_or_else(|| ".png");
                 let img_size: &str = run_matches.value_of(IMG_SIZE).unwrap_or_else(|| "800x800");
+
                 let width_height: Vec<&str> = img_size.split("x").collect();
                 let img_width: u32 = width_height[0].parse().unwrap();
                 let img_height: u32 = width_height[1].parse().unwrap();
@@ -93,7 +96,7 @@ fn main() {
 
                 // read the JSON file
                 let img_json_file = file_reader::read_input_json_file(json_file_arg);
-                
+
                 // generate the weights of the images
                 let images = weighted_image_chooser::generate_images_map(
                     &img_json_file,
@@ -102,7 +105,7 @@ fn main() {
 
                 // generate the metadata json files
                 nft_metadata_writer::make_nft_metadata(&img_json_file, &images);
-                
+
                 // generate the images
                 nifty_maker::make_nfts(
                     folder_arg.to_string(),

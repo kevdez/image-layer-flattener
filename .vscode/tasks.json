@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [{
+      "label": "build rust program",
+      "command": "cargo", // Could be any other shell command
+      "args": ["build"],
+      "type": "shell"
+  }]
+}

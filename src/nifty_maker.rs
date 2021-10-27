@@ -8,89 +8,165 @@ use image::DynamicImage;
 use image::ImageBuffer;
 use imageops::FilterType;
 
-use crate::file_reader::ImageDistributionJsonFile;
+use crate::file_reader::{ImageDistributionJsonFileWithClasses, InputJsonFileType, Layer};
 use crate::weighted_image_chooser::ImageMapping;
 
-pub fn make_nfts(
-    root_image_directory: String,
-    img_json_file: &ImageDistributionJsonFile,
-    images_map: &Vec<ImageMapping>,
-    img_width: u32,
-    img_height: u32
+fn store_all_images_from_layer(
+    hm: &mut HashMap<String, DynamicImage>,
+    layer: &Layer,
+    root_image_directory: &String,
 ) {
-    let layers = &img_json_file.layers;
-    let mut buffer_hashmap: HashMap<String, DynamicImage> = HashMap::new();
-
-    // This way goes through every generated image and every feature of each generated image,
-    // and checks if it encounters an image that it hasn't loaded into the hashmap yet.
-    // If it has not encountered it, it will add it to the hashmap, otherwise it moves on.
-    // for image in images_map.iter() {
-    //     for (i, layer) in layers.iter().enumerate() {
-    //         let feature_img_name = format!("{}.png", image.features_list[i]);
-    //         let path = format!(
-    //             "./{}/{}/{}",
-    //             root_image_directory, layer.folder_name, feature_img_name
-    //         );
-    //         print!("Checking for feature image if it already exists in hashmap: {} ...", path);
-    //         if !buffer_hashmap.contains_key(&path) {
-    //             if let Ok(feature_image) = image::open(&path) {
-    //                 println!("storing {} in hashmap", path);
-    //                 buffer_hashmap.insert(path, feature_image);
-    //             };
-    //         } else {
-    //             println!("already stored.");
-    //         }
-    //     }
-    // }
-
-    // This faster way goes through every folder of each feature, and opens up each image
-    // and loads it into the hashmap. There is no time wasted to see if an image is in
-    // the hashmap or not.
-    for folder in layers.iter() {
-        for distribution in folder.distribution.iter() {
-            let path = format!(
-                "./{}/{}/{}.png",
-                root_image_directory, folder.folder_name, distribution.value
-            );
+    for distribution in layer.distribution.iter() {
+        let path = format!(
+            "./{}/{}/{}.png",
+            root_image_directory, layer.folder_name, distribution.value
+        );
+        if !hm.contains_key(&path) {
             println!(
                 "Opening feature image and storing it into hashmap: {} ...",
                 path
             );
             if let Ok(feature_image) = image::open(&path) {
-                buffer_hashmap.insert(path, feature_image);
+                hm.insert(path, feature_image);
             };
         }
     }
+}
 
-    // create the images
-    images_map.par_iter().for_each(|image| {
-        let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
-        let file_name = image.file_name.clone();
-        for (i, layer) in layers.iter().enumerate() {
-            let feature_img_name = format!("{}.png", image.features_list[i]);
-            let path = format!(
-                "./{}/{}/{}",
-                root_image_directory, layer.folder_name, feature_img_name
-            );
-            println!("applying {} to image {}", path, file_name);
-            let resized_image;
-            #[allow(unused_variables)]
-            let loaded_image: &DynamicImage = match buffer_hashmap.get(&path) {
-                Some(dynamic_image) => {
-                    resized_image = dynamic_image.resize(img_width, img_height, FilterType::Lanczos3);
-                    &resized_image
-                }
-                None => {
-                    println!("path not found...");
-                    return ();
-                }
-            };
-            imageops::overlay(&mut imgbuf, &resized_image, 0, 0);
+fn create_image_feature_path(
+    root_image_directory: String,
+    folder_name: String,
+    feature_img_name: String,
+) -> String {
+    let feature_img_png = format!("{}.png", feature_img_name);
+    let path = format!(
+        "./{}/{}/{}",
+        root_image_directory, folder_name, feature_img_png
+    );
+    path
+}
+
+fn apply_img_file_to_buffer(
+    path: String,
+    hashmap: &HashMap<String, DynamicImage>,
+    buffer: &mut image::RgbaImage,
+    img_width: u32,
+    img_height: u32,
+) {
+    match hashmap.get(&path) {
+        Some(dynamic_image) => {
+            let resized_image = dynamic_image.resize(img_width, img_height, FilterType::Lanczos3);
+            imageops::overlay(buffer, &resized_image, 0, 0);
         }
+        None => {
+            println!("path not found...");
+            return ();
+        }
+    };
+}
 
-        let save_path = format!("results/images/{}", file_name);
+fn get_class_layers(
+    class_name: String,
+    img_json_file: &ImageDistributionJsonFileWithClasses,
+) -> &Vec<Layer> {
+    return &img_json_file
+        .classes
+        .iter()
+        .find(|class| return class_name == class.class_name)
+        .unwrap()
+        .layers;
+}
 
-        println!("Saving image: {:?} ...", save_path);
-        imgbuf.save(save_path).unwrap();
-    });
+fn save_buffer_to_file(file_name: String, buffer: &mut image::RgbaImage) {
+    let save_path = format!("results/images/{}", file_name);
+
+    println!("Saving image: {:?} ...", save_path);
+
+    buffer.save(save_path).unwrap();
+}
+
+pub fn make_nfts(
+    root_image_directory: String,
+    img_json_file_type: &InputJsonFileType,
+    images_map: &Vec<ImageMapping>,
+    img_width: u32,
+    img_height: u32,
+) {
+    match img_json_file_type {
+        InputJsonFileType::ImageDistributionJsonFile(img_json_file) => {
+            let layers = &img_json_file.layers;
+            let mut buffer_hashmap: HashMap<String, DynamicImage> = HashMap::new();
+
+            // load the image layers into a hashmap
+            for folder in layers.iter() {
+                store_all_images_from_layer(&mut buffer_hashmap, folder, &root_image_directory);
+            }
+
+            // create the images
+            images_map.par_iter().for_each(|image| {
+                let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
+                let file_name = image.file_name.clone();
+                for (i, layer) in layers.iter().enumerate() {
+                    let path = create_image_feature_path(
+                        root_image_directory.clone(),
+                        layer.folder_name.clone(),
+                        image.features_list[i].clone(),
+                    );
+                    println!("applying {} to image {}", path, file_name);
+                    apply_img_file_to_buffer(
+                        path,
+                        &buffer_hashmap,
+                        &mut imgbuf,
+                        img_width,
+                        img_height,
+                    );
+                }
+
+                // save the nft to an image
+                save_buffer_to_file(file_name, &mut imgbuf);
+            });
+        }
+        InputJsonFileType::ImageDistributionJsonFileWithClasses(img_json_file) => {
+            let classes = &img_json_file.classes;
+            let mut buffer_hashmap: HashMap<String, DynamicImage> = HashMap::new();
+
+            for class in classes {
+                let layers = &class.layers;
+
+                // load the image layers into a hashmap
+                for folder in layers.iter() {
+                    store_all_images_from_layer(&mut buffer_hashmap, folder, &root_image_directory);
+                }
+            }
+
+            // create the images
+            images_map.par_iter().for_each(|image| {
+                let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
+                let file_name = image.file_name.clone();
+                let class_name = image.class_name.clone();
+
+                // get layers for a given class name
+                let layers: &Vec<Layer> = get_class_layers(class_name, &img_json_file);
+
+                for (i, layer) in layers.iter().enumerate() {
+                    let path = create_image_feature_path(
+                        root_image_directory.clone(),
+                        layer.folder_name.clone(),
+                        image.features_list[i].clone(),
+                    );
+                    println!("applying {} to image {}", path, file_name);
+                    apply_img_file_to_buffer(
+                        path,
+                        &buffer_hashmap,
+                        &mut imgbuf,
+                        img_width,
+                        img_height,
+                    );
+                }
+
+                // save the nft to an image
+                save_buffer_to_file(file_name, &mut imgbuf);
+            });
+        }
+    }
 }

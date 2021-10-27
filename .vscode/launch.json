@@ -5,34 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug Rust Source Code",
       "type": "lldb",
       "request": "launch",
-      "name": "Debug executable 'nifty-magic-image-maker'",
-      "cargo": {
-        "args": [
-          "build",
-          "--bin=nifty-magic-image-maker",
-          "--package=nifty-magic-image-maker"
-        ],
-        "filter": {
-          "name": "nifty-magic-image-maker",
-          "kind": "bin"
-        }
-      },
-      "args": [],
-      "cwd": "${workspaceFolder}"
+      "preLaunchTask": "build rust program",
+      "program": "${workspaceRoot}/target/debug/nifty-magic-image-maker",
+      "args": ["run", "image_map_questionmark.json", "questionMarks", "-i=400x400", "--has-classes"],
+      "cwd": "${workspaceRoot}"
     },
     {
       "type": "lldb",
       "request": "launch",
       "name": "Debug unit tests in executable 'nifty-magic-image-maker'",
       "cargo": {
-        "args": [
-          "test",
-          "--no-run",
-          "--bin=nifty-magic-image-maker",
-          "--package=nifty-magic-image-maker"
-        ],
+        "args": ["test", "--no-run", "--bin=nifty-magic-image-maker", "--package=nifty-magic-image-maker"],
         "filter": {
           "name": "nifty-magic-image-maker",
           "kind": "bin"
@@ -46,14 +32,11 @@
       "request": "launch",
       "name": "Test highlighted function",
       "cargo": {
-        "args": [
-          "test",
-          "--no-run"
-        ]
+        "args": ["test", "--no-run"]
       },
       "program": "${cargo:program}",
       "args": ["${selectedText}"],
       "cwd": "${workspaceFolder}"
-    },
+    }
   ]
 }
