@@ -1,0 +1,251 @@
+{
+  "image_file_name": "Calaveritas",
+  "description": "Calaveritas 2021",
+  "image_count": 10,
+  "layers": [
+    {
+      "folder_name": "Backgrounds",
+      "trait_type": "Background",
+      "distribution": [
+        { "value": "Black", "weight": 6 },
+        { "value": "Blue", "weight": 10 },
+        { "value": "Green", "weight": 10 },
+        { "value": "Orange", "weight": 10 },
+        { "value": "Pink", "weight": 10 },
+        { "value": "Yellow", "weight": 10 }
+      ]
+    },
+    {
+      "folder_name": "Skull",
+      "trait_type": "Skull Color",
+      "distribution": [
+        { "value": "Azurite Skull", "weight": 3 },
+        { "value": "Ivory Skull", "weight": 15 },
+        { "value": "Jade Skull", "weight": 3 },
+        { "value": "Jasper Skull", "weight": 3 },
+        { "value": "Rose Skull", "weight": 3 },
+        { "value": "Topaz Skull", "weight": 3 }
+      ]
+    },
+    {
+      "folder_name": "Cheek",
+      "trait_type": "Cheek",
+      "distribution": [
+        { "value": "Brillo Rosa", "weight": 10 },
+        { "value": "Brillo Verde", "weight": 10 },
+        { "value": "Corazones Naranja Rosa", "weight": 10 },
+        { "value": "Cruz Naranja", "weight": 10 },
+        { "value": "Dotted Squiggle", "weight": 30 },
+        { "value": "Flor Naranja", "weight": 10 },
+        { "value": "Remolino Azul", "weight": 10 },
+        { "value": "Squiggle", "weight": 40 },
+        { "value": "Telaranas", "weight": 40 },
+        { "value": "Vines", "weight": 40 }
+      ]
+    },
+    {
+      "folder_name": "Chin",
+      "trait_type": "Chin",
+      "distribution": [
+        { "value": "California", "weight": 5 },
+        { "value": "Corazon Amarillo", "weight": 10 },
+        { "value": "Cruz Naranja", "weight": 10 },
+        { "value": "Espiral Verde", "weight": 5 },
+        { "value": "Estrella Verde", "weight": 10 },
+        { "value": "Flor", "weight": 40 },
+        { "value": "Girasol", "weight": 40 },
+        { "value": "Margarita", "weight": 10 },
+        { "value": "Remolino Azul", "weight": 10 },
+        { "value": "Telarana", "weight": 40 }
+      ]
+    },
+    {
+      "folder_name": "Eyebrows",
+      "trait_type": "Eyebrows",
+      "distribution": [
+        { "value": "Dotted Style 1", "weight": 5 },
+        { "value": "Dotted Style 2", "weight": 5 },
+        { "value": "Dotted Style 3", "weight": 10 },
+        { "value": "Dotted Style 4", "weight": 10 },
+        { "value": "Dotted Style 5", "weight": 10 },
+        { "value": "Dotted Style 6", "weight": 10 },
+        { "value": "MultiLine 1", "weight": 10 },
+        { "value": "MultiLine 2", "weight": 10 },
+        { "value": "MultiLine 3", "weight": 10 },
+        { "value": "MultiLine 4", "weight": 10 },
+        { "value": "Solid Style 1", "weight": 10 },
+        { "value": "Solid Style 2", "weight": 10 },
+        { "value": "Solid Style 3", "weight": 10 },
+        { "value": "Solid Style 4", "weight": 10 }
+      ]
+    },
+    {
+      "folder_name": "Eyes",
+      "trait_type": "Eyes",
+      "distribution": [
+        { "value": "Amapola", "weight": 10 },
+        { "value": "Brillo", "weight": 5 },
+        { "value": "California", "weight": 10 },
+        { "value": "Campanilla", "weight": 10 },
+        { "value": "Corazones", "weight": 4 },
+        { "value": "Estrellas", "weight": 5 },
+        { "value": "Estrellita", "weight": 10 },
+        { "value": "Girasol", "weight": 10 },
+        { "value": "Luz", "weight": 4 },
+        { "value": "Margarita", "weight": 10 },
+        { "value": "Remolino", "weight": 5 },
+        { "value": "Telaranas", "weight": 3 }
+      ]
+    },
+    {
+      "folder_name": "Jaw",
+      "trait_type": "Jaw",
+      "distribution": [
+        { "value": "Brillo", "weight": 8 },
+        { "value": "Corazones", "weight": 8 },
+        { "value": "Estrellas", "weight": 8 },
+        { "value": "Estrellita Verde y Negra", "weight": 8 },
+        { "value": "Florecitas Rosa", "weight": 8 },
+        { "value": "Florecitas", "weight": 8 },
+        { "value": "Squiggle", "weight": 15 },
+        { "value": "Squiggle Dotted", "weight": 15 },
+        { "value": "Squiggle with Dots", "weight": 15 }
+      ]
+    },
+    {
+      "folder_name": "Nose",
+      "trait_type": "Nose",
+      "distribution": [
+        { "value": "Corazon Amarillo Rosa", "weight": 10 },
+        { "value": "Corazon Amarillo", "weight": 10 },
+        { "value": "Corazon Azul Naranja", "weight": 10 },
+        { "value": "Corazon Azul Rosa", "weight": 10 },
+        { "value": "Corazon Azul", "weight": 10 },
+        { "value": "Corazon Negro", "weight": 5 },
+        { "value": "Corazon Rosa", "weight": 10 },
+        { "value": "Corazon Verde Amarillo", "weight": 10 },
+        { "value": "Corazon Verde Rosa", "weight": 10 },
+        { "value": "Corazon Verde Rosa 2", "weight": 10 },
+        { "value": "Estilo Azul Rosa", "weight": 10 },
+        { "value": "Estilo Naranja Verde", "weight": 10 },
+        { "value": "Estilo Rosa", "weight": 10 },
+        { "value": "Gotaz Azul", "weight": 10 },
+        { "value": "Gotas Con Rosa", "weight": 10 },
+        { "value": "Gotas Verde", "weight": 10 },
+        { "value": "TriColor 1", "weight": 60 },
+        { "value": "TriColor 2", "weight": 60 }
+      ]
+    },
+    {
+      "folder_name": "Head",
+      "trait_type": "Head",
+      "distribution": [
+        { "value": "Brillo Verde", "weight": 10 },
+        { "value": "Campanilla", "weight": 10 },
+        { "value": "Cempazuchitl", "weight": 10 },
+        { "value": "Chispas", "weight": 10 },
+        { "value": "Corazon Sagrado", "weight": 2 },
+        { "value": "Corazon", "weight": 10 },
+        { "value": "Girasol Azul", "weight": 10 },
+        { "value": "Maravilla", "weight": 10 },
+        { "value": "Remolino Naranja Rosa", "weight": 10 },
+        { "value": "Sol De Dia", "weight": 2 }
+      ]
+    },
+    {
+      "folder_name": "Teeth",
+      "trait_type": "Teeth",
+      "distribution": [
+        { "value": "Gold Tooth", "weight": 0 },
+        { "value": "Style 1", "weight": 10 },
+        { "value": "Style 2", "weight": 10 },
+        { "value": "Style 3", "weight": 10 },
+        { "value": "Style 4", "weight": 4 }
+      ]
+    },
+    {
+      "folder_name": "Texture",
+      "trait_type": "Texture",
+      "distribution": [
+        { "value": "Skull Contour", "weight": 10 }
+      ]
+    },
+    {
+      "folder_name": "Temples",
+      "trait_type": "Temples",
+      "distribution": [
+        { "value": "California", "weight": 5 },
+        { "value": "Corazones", "weight": 10 },
+        { "value": "Girasol Amarillo Lite", "weight": 10 },
+        { "value": "Girasol Azul", "weight": 10 },
+        { "value": "Girasol Azulito", "weight": 10 },
+        { "value": "Girasol Naranja", "weight": 10 },
+        { "value": "Remolino Verde", "weight": 10 },
+        { "value": "Squiggle", "weight": 20 },
+        { "value": "Squiggles", "weight": 20 },
+        { "value": "Telaranas", "weight": 20 }
+      ]
+    },
+    {
+      "folder_name": "ThirdEye",
+      "trait_type": "Third Eye",
+      "distribution": [
+        { "value": "Brillo Azul Amarillo", "weight": 10 },
+        { "value": "Brillo Rosa Amarillo", "weight": 10 },
+        { "value": "Corazon Sagrado", "weight": 5 },
+        { "value": "Cruz Dorada", "weight": 5 },
+        { "value": "Cruz Negra Lower", "weight": 5 },
+        { "value": "Cruz Negra", "weight": 5 },
+        { "value": "Flor Azul", "weight": 10 },
+        { "value": "Flor Naranja", "weight": 10 },
+        { "value": "Flor Rosa 2", "weight": 10 },
+        { "value": "Flor Rosa", "weight": 10 },
+        { "value": "Florecita Amarilla", "weight": 10 },
+        { "value": "Florecita Verde", "weight": 10 },
+        { "value": "Florecitas Rosa", "weight": 5 },
+        { "value": "Florecitas", "weight": 10 },
+        { "value": "Ojo TriColor", "weight": 5 },
+        { "value": "Ojo", "weight": 5 },
+        { "value": "Ornate 1", "weight": 5 },
+        { "value": "Ornate 2", "weight": 5 }
+      ]
+    },
+    {
+      "folder_name": "UnderEyes",
+      "trait_type": "Undereyes",
+      "distribution": [
+        { "value": "Brillos", "weight": 4 },
+        { "value": "Dotted Style 1", "weight": 10 },
+        { "value": "Dotted Style 2", "weight": 10 },
+        { "value": "Dotted Style 3", "weight": 10 },
+        { "value": "Dotted Style 4", "weight": 10 }
+      ]
+    },
+    {
+      "folder_name": "UpperLip",
+      "trait_type": "Upper Lip",
+      "distribution": [
+        { "value": "Brillo Azul", "weight": 10 },
+        { "value": "Brillo Naranja", "weight": 40 },
+        { "value": "Brillo Rosa", "weight": 40 },
+        { "value": "Brillos", "weight": 50 },
+        { "value": "Corazones Naranja", "weight": 10 },
+        { "value": "Corazones Rosa", "weight": 10 },
+        { "value": "Estrellita Azul", "weight": 10 },
+        { "value": "Estrellita Rosa", "weight": 10 },
+        { "value": "Flor Amarilla", "weight": 10 },
+        { "value": "Florecita Amarilla", "weight": 10 },
+        { "value": "Florecita Rosa 2", "weight": 10 },
+        { "value": "Florecita Rosa", "weight": 10 },
+        { "value": "Remolino Rosa", "weight": 10 }
+      ]
+    },
+    {
+      "folder_name": "Last",
+      "trait_type": "Outline Skull",
+      "distribution": [
+        { "value": "Outline Skull", "weight": 10 }
+      ]
+    }
+  ]
+}
