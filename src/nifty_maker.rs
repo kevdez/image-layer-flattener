@@ -55,7 +55,8 @@ fn apply_img_file_to_buffer(
 ) {
     match hashmap.get(&path) {
         Some(dynamic_image) => {
-            let resized_image = dynamic_image.resize(img_width, img_height, FilterType::Lanczos3);
+            let resized_image =
+                dynamic_image.resize(img_width + 10, img_height + 10, FilterType::Lanczos3);
             imageops::overlay(buffer, &resized_image, 0, 0);
         }
         None => {
@@ -104,7 +105,8 @@ pub fn make_nfts(
 
             // create the images
             images_map.par_iter().for_each(|image| {
-                let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
+                let mut imgbuf: image::RgbaImage =
+                    ImageBuffer::new(img_width + 10, img_height + 10);
                 let file_name = image.file_name.clone();
                 for (i, layer) in layers.iter().enumerate() {
                     let path = create_image_feature_path(
@@ -122,8 +124,14 @@ pub fn make_nfts(
                     );
                 }
 
+                // remove the dark border that Ai adds
+                let sub_img = imageops::crop(&mut imgbuf, 4, 4, img_width, img_height);
+                sub_img
+                    .to_image()
+                    .save_with_format(file_name, image::ImageFormat::Png)
+                    .unwrap();
                 // save the nft to an image
-                save_buffer_to_file(file_name, &mut imgbuf);
+                // save_buffer_to_file(file_name, &mut imgbuf);
             });
         }
         InputJsonFileType::ImageDistributionJsonFileWithClasses(img_json_file) => {
@@ -141,7 +149,8 @@ pub fn make_nfts(
 
             // create the images
             images_map.par_iter().for_each(|image| {
-                let mut imgbuf: image::RgbaImage = ImageBuffer::new(img_width, img_height);
+                let mut imgbuf: image::RgbaImage =
+                    ImageBuffer::new(img_width + 10, img_height + 10);
                 let file_name = image.file_name.clone();
                 let class_name = image.class_name.clone();
 
@@ -163,9 +172,15 @@ pub fn make_nfts(
                         img_height,
                     );
                 }
+                let save_path = format!("results/images/{}", file_name);
 
+                // remove the dark border that Ai adds
+                let sub_img = imageops::crop(&mut imgbuf, 4, 4, img_width, img_height);
+                sub_img
+                    .to_image()
+                    .save_with_format(save_path, image::ImageFormat::Png)
+                    .unwrap();
                 // save the nft to an image
-                save_buffer_to_file(file_name, &mut imgbuf);
             });
         }
     }
