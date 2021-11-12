@@ -22,8 +22,8 @@ fn main() {
     const IMG_SIZE: &str = "image size";
     let matches = App::new("Nifty Magic Image Maker")
         .version("1.0")
-        .author("kevdez <contact@whatsnextforkev.in>")
-        .about("Makes NFT images and metadata files")
+        .author("kevdez <@mintyatmosphere>")
+        .about("A tool that generates NFT images and JSON metadata files")
         .subcommand(App::new("clear").about("clears the results/ directory"))
         .subcommand(
             App::new("run")
