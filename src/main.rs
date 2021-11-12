@@ -22,7 +22,7 @@ fn main() {
     const IMG_SIZE: &str = "image size";
     let matches = App::new("Nifty Magic Image Maker")
         .version("1.0")
-        .author("Kevin H. <contact@whatsnextforkev.in>")
+        .author("kevdez <contact@whatsnextforkev.in>")
         .about("Makes NFT images and metadata files")
         .subcommand(App::new("clear").about("clears the results/ directory"))
         .subcommand(
@@ -60,7 +60,10 @@ fn main() {
         )
         .get_matches();
 
-    let input_arg: &str = matches.subcommand_name().unwrap();
+    let input_arg: &str = match matches.subcommand_name() {
+        Some(input_args) => input_args,
+        None => panic!("\n\nArguments were not passed to the program. :(\n\nTry the 'run' argument in the command line. For example:\n\n./nifty-magic-image-maker run\nor\ncargo run -- run\n\n")
+    };
     match input_arg {
         "clear" => {
             print!("clearing the results/ directory...");
