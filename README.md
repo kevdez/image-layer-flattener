@@ -1,8 +1,6 @@
 # nifty-image-magic-maker
 An image generator that can generate your 10k NFT project within seconds.
 
-_If you happen to clone this repo or use this CLI tool, please follow me on Twitter: https://twitter.com/mintyatmosphere_
-
 ```
 Nifty Magic Image Maker 1.0
 kevdez <@mintyatmosphere>
