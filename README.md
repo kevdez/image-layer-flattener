@@ -1,4 +1,4 @@
-# nifty-image-magic-maker
+# image-layer-flattener
 An image generator that can generate your 10k NFT project within seconds.
 
 ```
